@@ -11,8 +11,6 @@ import {
   Settings,
   Sparkles,
 } from "lucide-react";
-import { useAuthStore } from "@/store/useAuthStore";
-import Avatar from "./Avatar";
 
 const navItems = [
   { label: "Home", icon: LayoutGrid, href: "/home", filled: true },
@@ -24,11 +22,6 @@ const navItems = [
 
 export default function Sidebar() {
   const pathname = usePathname();
-  const user = useAuthStore((s) => s.user);
-
-  // School card shows the user's school; falls back to their email if none is set yet.
-  const primaryLine = user?.school?.name || user?.name || "VedaAI";
-  const secondaryLine = user?.school?.location || user?.email || "";
 
   return (
     <aside className="hidden md:flex flex-col fixed left-3.5 top-3.5 bottom-3.5 w-[288px] bg-white rounded-[28px] shadow-[0_10px_40px_rgba(0,0,0,0.06)] z-40 px-4 py-5">
@@ -47,7 +40,7 @@ export default function Sidebar() {
       {/* Create Assignment button — dark pill with orange glow ring */}
       <Link
         href="/assignments/create"
-        className="create-glow press group flex items-center justify-center gap-2 bg-[#181818] text-white text-[15px] font-semibold rounded-full py-3 px-4 mb-7 hover:bg-black"
+        className="create-glow press group flex items-center justify-center gap-2 mt-6 bg-[#181818] text-white text-[15px] font-semibold rounded-full py-3 px-4 mb-7 hover:bg-black"
       >
         <Sparkles
           size={16}
@@ -68,7 +61,7 @@ export default function Sidebar() {
             <Link
               key={label}
               href={href}
-              className={`press group flex items-center gap-3 px-3.5 py-3 rounded-2xl text-[15px] ${
+              className={`press group flex items-center gap-3 px-3.5 py-3 rounded-xl text-[15px] ${
                 isActive
                   ? "bg-[#F2F2F2] text-[#303030] font-semibold"
                   : "text-[#5E5E5E] font-medium hover:bg-[#FF5623]/8 hover:text-[#FF5623]"
@@ -107,14 +100,20 @@ export default function Sidebar() {
         </Link>
 
         <div className="flex items-center gap-3 bg-[#F4F4F4] rounded-2xl p-2.5">
-          <Avatar src={user?.avatarUrl} name={user?.name} size={40} className="w-10 h-10" />
+          <Image
+            src="/schoolAvatar.png"
+            alt="School"
+            width={44}
+            height={44}
+            className="w-10 h-10 rounded-full object-cover flex-shrink-0"
+          />
           <div className="min-w-0">
             <p className="text-[13px] font-bold text-[#303030] leading-tight truncate">
-              {primaryLine}
+              Delhi Public School
             </p>
-            {secondaryLine && (
-              <p className="text-[11px] text-[#9A9A9A] leading-tight truncate">{secondaryLine}</p>
-            )}
+            <p className="text-[11px] text-[#9A9A9A] leading-tight truncate">
+              Bokaro Steel City
+            </p>
           </div>
         </div>
       </div>
