@@ -1,4 +1,5 @@
 "use client";
+import { useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
@@ -12,19 +13,30 @@ import {
   Sparkles,
 } from "lucide-react";
 import { useAuthStore } from "@/store/useAuthStore";
+import { useAssignmentStore } from "@/store/useAssignmentStore";
 import Avatar from "./Avatar";
 
 const navItems = [
-  { label: "Home", icon: LayoutGrid, href: "/home", filled: true },
-  { label: "My Groups", icon: SquareUser, href: "/groups", filled: true },
-  { label: "Assignments", icon: FileText, href: "/assignments", filled: true },
-  { label: "AI Teacher's Toolkit", icon: BookText, href: "/toolkit", filled: false },
-  { label: "My Library", icon: PieChart, href: "/library", filled: false },
+  { label: "Home", icon: LayoutGrid, href: "/home" },
+  { label: "My Groups", icon: SquareUser, href: "/groups" },
+  { label: "Assignments", icon: FileText, href: "/assignments" },
+  { label: "AI Teacher's Toolkit", icon: BookText, href: "/toolkit" },
+  { label: "My Library", icon: PieChart, href: "/library" },
 ];
 
 export default function Sidebar() {
   const pathname = usePathname();
   const user = useAuthStore((s) => s.user);
+  const assignments = useAssignmentStore((s) => s.assignments);
+  const loaded = useAssignmentStore((s) => s.loaded);
+  const fetchAssignments = useAssignmentStore((s) => s.fetchAssignments);
+
+  // The sidebar shows the assignment count on any page, so fetch once if a page hasn't already.
+  useEffect(() => {
+    if (!loaded) fetchAssignments();
+  }, [loaded, fetchAssignments]);
+
+  const assignmentCount = assignments.filter((a) => a.status !== "failed").length;
 
   // School card shows the user's school; falls back to their email if none is set yet.
   const primaryLine = user?.school?.name || user?.name || "VedaAI";
@@ -59,7 +71,7 @@ export default function Sidebar() {
 
       {/* Nav */}
       <nav className="flex flex-col gap-1 flex-1">
-        {navItems.map(({ label, icon: Icon, href, filled }) => {
+        {navItems.map(({ label, icon: Icon, href }) => {
           const isActive =
             href === "/assignments"
               ? pathname.startsWith("/assignments")
@@ -80,9 +92,14 @@ export default function Sidebar() {
                 className={`transition-colors ${
                   isActive ? "text-[#303030]" : "text-[#9A9A9A] group-hover:text-[#303030]"
                 }`}
-                fill={filled ? (isActive ? "none" : "#B6B6B6") : "none"}
+                fill="none"
               />
               <span>{label}</span>
+              {href === "/assignments" && assignmentCount > 0 && (
+                <span className="ml-auto inline-flex items-center justify-center min-w-5.5 h-5.5 px-1.5 rounded-full bg-[#FF5623] text-white text-[11px] font-bold leading-none">
+                  {assignmentCount}
+                </span>
+              )}
             </Link>
           );
         })}

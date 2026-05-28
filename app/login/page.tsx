@@ -35,6 +35,7 @@ export default function LoginPage() {
   const router = useRouter();
   const { login, status, user, hydrate } = useAuthStore();
   const btnRef = useRef<HTMLDivElement>(null);
+  const btnWrapRef = useRef<HTMLDivElement>(null);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -73,6 +74,8 @@ export default function LoginPage() {
             }
           },
         });
+        // Match the guest button's width (responsive, capped at 320) so both CTAs are the same size.
+        const width = Math.min(320, Math.round(btnWrapRef.current?.offsetWidth || 320));
         window.google.accounts.id.renderButton(btnRef.current, {
           type: "standard",
           theme: "outline",
@@ -80,7 +83,7 @@ export default function LoginPage() {
           text: "continue_with",
           shape: "pill",
           logo_alignment: "center",
-          width: 320,
+          width,
         });
       })
       .catch((e) => setError((e as Error).message));
@@ -141,7 +144,10 @@ export default function LoginPage() {
             </p>
 
             {/* Google button (rendered by GIS) */}
-            <div className="min-h-[44px] flex items-center justify-center">
+            <div
+              ref={btnWrapRef}
+              className="w-full max-w-[320px] min-h-[44px] flex items-center justify-center"
+            >
               {GOOGLE_CLIENT_ID ? (
                 <div ref={btnRef} className={busy ? "opacity-50 pointer-events-none" : ""} />
               ) : (

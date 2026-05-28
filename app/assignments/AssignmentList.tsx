@@ -49,13 +49,13 @@ function Card({ a }: { a: ApiAssignment }) {
           router.push(href);
         }
       }}
-      className="bg-white rounded-[22px] p-5 shadow-[0_4px_20px_rgba(0,0,0,0.04)] relative cursor-pointer transition-all hover:shadow-[0_8px_28px_rgba(0,0,0,0.09)] hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FF5623]/40"
+      className="bg-white rounded-[22px] p-7 shadow-[0_4px_20px_rgba(0,0,0,0.04)] relative cursor-pointer transition-all hover:shadow-[0_8px_28px_rgba(0,0,0,0.09)] hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FF5623]/40"
     >
       <div className="flex items-start justify-between">
         <div className="flex items-center gap-2 pr-2">
-          <h3 className="font-bold text-[16px] text-[#303030]">{a.title}</h3>
+          <h3 className="font-bold text-[24px] text-[#303030]">{a.title}</h3>
           {badge && (
-            <span className={`text-[10px] font-semibold rounded-full px-2 py-0.5 ${badge.cls}`}>
+            <span className={`text-[12px] font-semibold rounded-full px-2 py-0.5 ${badge.cls}`}>
               {badge.text}
             </span>
           )}
@@ -108,11 +108,11 @@ function Card({ a }: { a: ApiAssignment }) {
         </div>
       </div>
 
-      <div className="flex items-center justify-between mt-7">
-        <span className="text-[12px] text-[#5E5E5E]">
+      <div className="flex items-center justify-between mt-12">
+        <span className="text-[16px] text-[#5E5E5E]">
           <span className="font-bold text-[#303030]">Assigned on</span> : {formatDate(a.createdAt)}
         </span>
-        <span className="text-[12px] text-[#5E5E5E]">
+        <span className="text-[16px] text-[#5E5E5E]">
           <span className="font-bold text-[#303030]">Due</span> : {formatDate(a.dueDate)}
         </span>
       </div>
@@ -212,10 +212,10 @@ export default function AssignmentList() {
       )}
 
       {/* Floating CTA (desktop — mobile uses the round + FAB) */}
-      <div className="hidden md:block fixed left-1/2 -translate-x-1/2 bottom-7 z-30">
+      <div className="hidden md:flex justify-center fixed left-[312px] right-3.5 bottom-7 z-30 pointer-events-none">
         <Link
           href="/assignments/create"
-          className="flex items-center gap-2.5 bg-[#181818] text-white font-semibold text-[15px] rounded-full px-8 py-4 shadow-[0_10px_30px_rgba(0,0,0,0.25)] hover:bg-black transition-colors"
+          className="pointer-events-auto flex items-center gap-2.5 bg-[#181818] text-white font-semibold text-[15px] rounded-full px-8 py-4 shadow-[0_10px_30px_rgba(0,0,0,0.25)] hover:bg-black transition-colors"
         >
           <Plus size={19} strokeWidth={2.6} />
           Create Assignment
