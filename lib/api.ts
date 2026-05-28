@@ -13,10 +13,15 @@ function onUnauthorized() {
   }
 }
 
-async function request<T>(path: string, options?: RequestInit): Promise<T> {
-  // Never hang forever — abort after 12s so the UI can show an error + retry.
+async function request<T>(
+  path: string,
+  options?: RequestInit,
+  timeoutMs = 12_000
+): Promise<T> {
+  // Never hang forever — abort after `timeoutMs` so the UI can show an error + retry.
+  // AI calls (section regenerate) pass a longer budget than ordinary requests.
   const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), 12_000);
+  const timeout = setTimeout(() => controller.abort(), timeoutMs);
   const token = getToken();
   let res: Response;
   try {
@@ -139,10 +144,11 @@ export const api = {
   updatePaper: (paperId: string, body: UpdatePaperBody) =>
     request<ApiPaper>(`/papers/${paperId}`, { method: "PATCH", body: JSON.stringify(body) }),
   regenerateSection: (paperId: string, index: number, instruction: string) =>
-    request<{ questions: ApiEditQuestion[] }>(`/papers/${paperId}/sections/${index}/regenerate`, {
-      method: "POST",
-      body: JSON.stringify({ instruction }),
-    }),
+    request<{ questions: ApiEditQuestion[] }>(
+      `/papers/${paperId}/sections/${index}/regenerate`,
+      { method: "POST", body: JSON.stringify({ instruction }) },
+      30_000 // AI call: well above the worst-case interactive latency
+    ),
 
   async uploadFile(file: File): Promise<FileMeta> {
     const fd = new FormData();
