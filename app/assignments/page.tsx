@@ -43,7 +43,7 @@ export default function AssignmentsPage() {
       {/* Mobile-only floating "+" action button */}
       <Link
         href="/assignments/create"
-        className="md:hidden fixed right-4 bottom-24 z-40 w-12 h-12 rounded-full bg-[#FF5623] text-white flex items-center justify-center shadow-[0_8px_24px_rgba(255,86,35,0.45)] active:scale-95 transition-transform"
+        className="md:hidden fixed right-4 bottom-24 z-40 w-12 h-12 rounded-full bg-white text-[#FF5623] flex items-center justify-center shadow-[0_6px_18px_rgba(0,0,0,0.15)] active:scale-95 transition-transform"
         aria-label="Create assignment"
       >
         <Plus size={24} strokeWidth={2.6} />

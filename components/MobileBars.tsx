@@ -109,7 +109,7 @@ export function MobileBottomNav() {
                 isActive ? "bg-white/10 text-white" : "text-[#8A8A8A] hover:text-[#FF5623]"
               }`}
             >
-              <Icon size={20} strokeWidth={2} fill={isActive ? "white" : "none"} />
+              <Icon size={20} strokeWidth={2} fill="none" />
               <span className="text-[10px] font-medium">{label}</span>
             </Link>
           );

@@ -26,7 +26,7 @@ body {
 }
 
 body {
-  /* NOTE: the ~1.25x "baked-in browser zoom" is set as an inline style on
+  /* NOTE: the ~1.125x "baked-in browser zoom" is set as an inline style on
      <body> in app/layout.tsx, NOT here — Next 16's CSS pipeline (Lightning
      CSS) strips the non-standard `zoom` property, so a CSS rule silently
      vanishes. Inline style bypasses that pipeline. */

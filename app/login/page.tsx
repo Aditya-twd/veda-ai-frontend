@@ -105,14 +105,14 @@ export default function LoginPage() {
   // Avoid a flash of the login form while we check for an existing session.
   if (status === "loading" || (status === "authed" && user)) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-[#EEEEEE] to-[#DADADA]">
+      <div className="min-h-[calc(100vh*0.888)] flex items-center justify-center bg-gradient-to-b from-[#EEEEEE] to-[#DADADA]">
         <Loader2 className="animate-spin text-[#A9A9A9]" size={26} />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-[#EEEEEE] to-[#DADADA] px-5 py-10">
+    <div className="min-h-[calc(100vh*0.888)] flex items-center justify-center bg-gradient-to-b from-[#EEEEEE] to-[#DADADA] px-5 py-6">
       <div className="w-full max-w-[440px]">
         <div className="relative bg-gradient-to-b from-[#F4F4F4] to-[#EFEFEF] rounded-[32px] shadow-[0_20px_60px_rgba(0,0,0,0.10)] px-8 py-10 sm:px-10 sm:py-12 overflow-hidden">
           {/* soft brand glow */}

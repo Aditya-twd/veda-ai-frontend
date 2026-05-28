@@ -46,7 +46,7 @@ export default function AppLayout({ children, breadcrumb, icon = "grid" }: AppLa
       <MobileTopBar />
 
       {/* Desktop content area */}
-      <div className="md:ml-[312px] md:mr-3.5 md:pt-3.5 px-3 md:px-0 pb-28 md:pb-4">
+      <div className="md:ml-[312px] md:mr-3.5 pt-5 md:pt-3.5 px-3 md:px-0 pb-28 md:pb-4">
         <div className="hidden md:block">
           <Header breadcrumb={breadcrumb} icon={icon} />
         </div>

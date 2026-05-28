@@ -71,20 +71,16 @@ export default function Sidebar() {
               className={`press group flex items-center gap-3 px-3.5 py-3 rounded-2xl text-[15px] ${
                 isActive
                   ? "bg-[#F2F2F2] text-[#303030] font-semibold"
-                  : "text-[#5E5E5E] font-medium hover:bg-[#FF5623]/8 hover:text-[#FF5623]"
+                  : "text-[#5E5E5E] font-medium hover:bg-black/4 hover:text-[#303030]"
               }`}
             >
               <Icon
                 size={19}
                 strokeWidth={isActive ? 2 : 1.9}
                 className={`transition-colors ${
-                  isActive
-                    ? "text-[#303030]"
-                    : `text-[#9A9A9A] group-hover:text-[#FF5623]${
-                        filled ? " group-hover:fill-[#FF5623]" : ""
-                      }`
+                  isActive ? "text-[#303030]" : "text-[#9A9A9A] group-hover:text-[#303030]"
                 }`}
-                fill={filled ? (isActive ? "#303030" : "#B6B6B6") : "none"}
+                fill={filled ? (isActive ? "none" : "#B6B6B6") : "none"}
               />
               <span>{label}</span>
             </Link>
@@ -96,7 +92,7 @@ export default function Sidebar() {
       <div className="mt-auto pt-4">
         <Link
           href="/settings"
-          className="press group flex items-center gap-3 px-3.5 py-2.5 mb-3 rounded-2xl text-[15px] text-[#9A9A9A] hover:text-[#FF5623] hover:bg-[#FF5623]/8"
+          className="press group flex items-center gap-3 px-3.5 py-2.5 mb-3 rounded-2xl text-[15px] text-[#9A9A9A] hover:text-[#303030] hover:bg-black/4"
         >
           <Settings
             size={19}

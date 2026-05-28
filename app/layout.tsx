@@ -20,7 +20,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={bricolage.variable}>
       {/* zoom baked in here (not in globals.css — Lightning CSS strips `zoom`) */}
-      <body style={{ zoom: 1.25 }}>
+      <body style={{ zoom: 1.125 }}>
         {children}
       </body>
     </html>
